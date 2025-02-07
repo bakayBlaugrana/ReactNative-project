@@ -12,9 +12,11 @@ export const styles = StyleSheet.create({
     height: 50,
     borderWidth: 1,
     borderColor: "black",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
-    paddingVertical: "5%",
     textAlign: "center",
     color: "black",
     fontSize: 16,
