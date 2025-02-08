@@ -3,18 +3,19 @@ import { Text, TouchableOpacity, StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   view: {
     flex: 1,
-    gap: 10,
+    gap: 15,
     justifyContent: "center",
     alignItems: "center",
   },
   button: {
     width: 200,
     height: 50,
-    borderWidth: 1,
-    borderColor: "black",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 12,
   },
   buttonText: {
     textAlign: "center",
@@ -23,18 +24,16 @@ export const styles = StyleSheet.create({
   },
 });
 
-export const NavigationButtons = () => {
+const NavigationButtons = ({ buttonsData, onPress }) => {
   return (
     <>
-      <TouchableOpacity style={styles.button} onPress={() => alert("Pressed!")}>
-        <Text style={styles.buttonText}>Создать</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => alert("Pressed!")}>
-        <Text style={styles.buttonText}>История</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => alert("Pressed!")}>
-        <Text style={styles.buttonText}>Выйти</Text>
-      </TouchableOpacity>
+      {buttonsData.map((button) => (
+        <TouchableOpacity key={button.type} style={styles.button} onPress={() => onPress(button.type)}>
+          <Text style={styles.buttonText}>{button.text}</Text>
+        </TouchableOpacity>
+      ))}
     </>
   );
 };
+
+export default NavigationButtons;
