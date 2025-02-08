@@ -1,13 +1,7 @@
-import { View } from "react-native";
-import {
-  NavigationButtons,
-  styles,
-} from "@/components/NavigationButtons/NavigationButtons";
+import { CalculatorPage } from "../pages/CalculatorPage";
 
 export default function Index() {
   return (
-    <View style={styles.view}>
-      <NavigationButtons />
-    </View>
+    <CalculatorPage />
   );
 }
