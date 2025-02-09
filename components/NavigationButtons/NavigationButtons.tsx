@@ -1,38 +1,26 @@
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
+import { FC } from "react";
+import { SafeAreaView } from "react-native";
+import styles from './styles';
+import {Button} from "@/components/Button";
 
-export const styles = StyleSheet.create({
-  view: {
-    flex: 1,
-    gap: 15,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  button: {
-    width: 200,
-    height: 50,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 12,
-  },
-  buttonText: {
-    textAlign: "center",
-    color: "black",
-    fontSize: 16,
-  },
-});
+interface Props {
+  buttonsData: { type: string, text: string }[];
+  onPress: (type: string) => void;
+}
 
-const NavigationButtons = ({ buttonsData, onPress }) => {
+const NavigationButtons: FC<Props> = ({ buttonsData, onPress }) => {
   return (
-    <>
+    <SafeAreaView style={styles.view}>
       {buttonsData.map((button) => (
-        <TouchableOpacity key={button.type} style={styles.button} onPress={() => onPress(button.type)}>
-          <Text style={styles.buttonText}>{button.text}</Text>
-        </TouchableOpacity>
+        <Button
+          key={button.type}
+          title={button.text}
+          style={styles.button}
+          textStyle={styles.buttonText}
+          onPress={() => onPress(button.type)}
+        />
       ))}
-    </>
+    </SafeAreaView>
   );
 };
 
