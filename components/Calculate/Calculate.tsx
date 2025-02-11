@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Text, View, SafeAreaView, ScrollView } from "react-native";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
 
 import { Button } from "@/components/Button";
 import { Modal } from "@/components/Modal";
@@ -9,7 +9,7 @@ import styles from "./styles";
 
 export interface ListItemType {
   name: string,
-  spent: string | number,
+  spent: number,
   uuid: string,
 }
 
@@ -20,6 +20,7 @@ interface Props {
 const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [list, setList] = useState<ListItemType[]>([]);
+  const [values, setValues] = useState<Nullable<ListItemType>>(null);
 
   const onMainButton = (type) => {
     switch (type) {
@@ -35,6 +36,17 @@ const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
         break;
     }
   }
+
+  const onDelete = (uuid) => {
+    setList((prevList) => {
+      return prevList.filter((item) => item.uuid !== uuid);
+    });
+  };
+
+  const onEdit = (values) => {
+    setValues(values);
+    setModalIsOpen(true);
+  };
 
   return (
     <SafeAreaView>
@@ -57,14 +69,29 @@ const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
                 <Text>Потрачено: {item.spent}</Text>
               </View>
               <View style={styles.buttons}>
-                <Button style={[styles.listItemButton, styles.deleteButton]} title='Удалить' />
-                <Button style={[styles.listItemButton, styles.editButton]} title='Редактировать' />
+                <Button
+                  style={[styles.listItemButton, styles.deleteButton]}
+                  title='Удалить'
+                  onPress={() => onDelete(item.uuid)}
+                />
+                <Button
+                  style={[styles.listItemButton, styles.editButton]}
+                  title='Редактировать'
+                  onPress={() => onEdit(item)}
+                />
               </View>
             </View>
           ))}
         </View>
       </ScrollView>
-      {modalIsOpen && <Modal setModalIsOpen={setModalIsOpen} setList={setList} />}
+      {modalIsOpen &&
+        <Modal
+          setModalIsOpen={setModalIsOpen}
+          setList={setList}
+          values={values}
+          setValues={setValues}
+        />
+      }
     </SafeAreaView>
   )
 }
