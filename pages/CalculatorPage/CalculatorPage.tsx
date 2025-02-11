@@ -20,28 +20,28 @@ const CalculatorPage = () => {
         setHistoryIsOpen(true);
         break;
       case buttonTypes.leave:
-        Alert.alert('Выход из приложения', 'Вы уверены что хотите выйти из приложения?', [
-          { text: 'Отмена' },
-          { text: 'Выйти', onPress: () => BackHandler.exitApp() }
-        ])
+        Alert.alert(
+          "Выход из приложения",
+          "Вы уверены что хотите выйти из приложения?",
+          [
+            { text: "Отмена" },
+            { text: "Выйти", onPress: () => BackHandler.exitApp() },
+          ]
+        );
         break;
       default:
     }
-  }
+  };
 
   return (
     <>
-      {(!calculateIsOpen && !historyIsOpen) && (
+      {!calculateIsOpen && !historyIsOpen && (
         <NavigationButtons buttonsData={buttons} onPress={onButtonPress} />
       )}
-      {calculateIsOpen && (
-        <Calculate setCalculateIsOpen={setCalculateIsOpen} />
-      )}
-      {historyIsOpen && (
-        <History setHistoryIsOpen={setHistoryIsOpen} />
-      )}
+      {calculateIsOpen && <Calculate setCalculateIsOpen={setCalculateIsOpen} />}
+      {historyIsOpen && <History setHistoryIsOpen={setHistoryIsOpen} />}
     </>
-  )
-}
+  );
+};
 
 export default CalculatorPage;

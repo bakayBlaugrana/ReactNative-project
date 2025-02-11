@@ -8,9 +8,9 @@ import { mainButtons, mainButtonTypes } from "@/components/Calculate/constants";
 import styles from "./styles";
 
 export interface ListItemType {
-  name: string,
-  spent: string | number,
-  uuid: string,
+  name: string;
+  spent: string | number;
+  uuid: string;
 }
 
 interface Props {
@@ -34,7 +34,7 @@ const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
       default:
         break;
     }
-  }
+  };
 
   return (
     <SafeAreaView>
@@ -42,7 +42,7 @@ const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
         {mainButtons.map(({ text, type }) => (
           <Button
             key={type}
-            style={[ styles.mainButton, styles[`${type}Button`]]}
+            style={[styles.mainButton, styles[`${type}Button`]]}
             title={text}
             onPress={() => onMainButton(type)}
           />
@@ -57,16 +57,24 @@ const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
                 <Text>Потрачено: {item.spent}</Text>
               </View>
               <View style={styles.buttons}>
-                <Button style={[styles.listItemButton, styles.deleteButton]} title='Удалить' />
-                <Button style={[styles.listItemButton, styles.editButton]} title='Редактировать' />
+                <Button
+                  style={[styles.listItemButton, styles.deleteButton]}
+                  title="Удалить"
+                />
+                <Button
+                  style={[styles.listItemButton, styles.editButton]}
+                  title="Редактировать"
+                />
               </View>
             </View>
           ))}
         </View>
       </ScrollView>
-      {modalIsOpen && <Modal setModalIsOpen={setModalIsOpen} setList={setList} />}
+      {modalIsOpen && (
+        <Modal setModalIsOpen={setModalIsOpen} setList={setList} />
+      )}
     </SafeAreaView>
-  )
-}
+  );
+};
 
 export default Calculate;
