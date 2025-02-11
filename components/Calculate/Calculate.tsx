@@ -35,7 +35,7 @@ const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
       default:
         break;
     }
-  }
+  };
 
   const onDelete = (uuid) => {
     setList((prevList) => {
@@ -54,7 +54,7 @@ const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
         {mainButtons.map(({ text, type }) => (
           <Button
             key={type}
-            style={[ styles.mainButton, styles[`${type}Button`]]}
+            style={[styles.mainButton, styles[`${type}Button`]]}
             title={text}
             onPress={() => onMainButton(type)}
           />
@@ -93,7 +93,7 @@ const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
         />
       }
     </SafeAreaView>
-  )
-}
+  );
+};
 
 export default Calculate;
