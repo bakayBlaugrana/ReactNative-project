@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Text, View, SafeAreaView, ScrollView } from "react-native";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
 
 import { Button } from "@/components/Button";
 import { Modal } from "@/components/Modal";
@@ -8,9 +8,9 @@ import { mainButtons, mainButtonTypes } from "@/components/Calculate/constants";
 import styles from "./styles";
 
 export interface ListItemType {
-  name: string;
-  spent: string | number;
-  uuid: string;
+  name: string,
+  spent: number,
+  uuid: string,
 }
 
 interface Props {
@@ -20,6 +20,7 @@ interface Props {
 const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [list, setList] = useState<ListItemType[]>([]);
+  const [values, setValues] = useState<Nullable<ListItemType>>(null);
 
   const onMainButton = (type) => {
     switch (type) {
@@ -34,6 +35,17 @@ const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
       default:
         break;
     }
+  };
+
+  const onDelete = (uuid) => {
+    setList((prevList) => {
+      return prevList.filter((item) => item.uuid !== uuid);
+    });
+  };
+
+  const onEdit = (values) => {
+    setValues(values);
+    setModalIsOpen(true);
   };
 
   return (
@@ -59,20 +71,27 @@ const Calculate: FC<Props> = ({ setCalculateIsOpen }) => {
               <View style={styles.buttons}>
                 <Button
                   style={[styles.listItemButton, styles.deleteButton]}
-                  title="Удалить"
+                  title='Удалить'
+                  onPress={() => onDelete(item.uuid)}
                 />
                 <Button
                   style={[styles.listItemButton, styles.editButton]}
-                  title="Редактировать"
+                  title='Редактировать'
+                  onPress={() => onEdit(item)}
                 />
               </View>
             </View>
           ))}
         </View>
       </ScrollView>
-      {modalIsOpen && (
-        <Modal setModalIsOpen={setModalIsOpen} setList={setList} />
-      )}
+      {modalIsOpen &&
+        <Modal
+          setModalIsOpen={setModalIsOpen}
+          setList={setList}
+          values={values}
+          setValues={setValues}
+        />
+      }
     </SafeAreaView>
   );
 };
