@@ -1,0 +1,1 @@
+export { HistoryCardInfo } from "./HistoryCardInfo";
