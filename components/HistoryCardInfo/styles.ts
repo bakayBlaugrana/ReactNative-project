@@ -1,17 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  cardList: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 12,
-    marginTop: 20,
-  },
   card: {
-    width: "95%",
-    marginHorizontal: "auto",
-    borderRadius: 25,
-    overflow: "hidden",
+    marginTop: 30,
+    width: "100%",
   },
   background: {},
   overlay: {
@@ -29,5 +21,28 @@ export const styles = StyleSheet.create({
     lineHeight: 35,
     letterSpacing: 2,
     color: "white",
+  },
+  title: {
+    marginTop: 10,
+    paddingVertical: 10,
+    fontSize: 22,
+    fontWeight: 600,
+    textAlign: "center",
+  },
+  item: {
+    paddingHorizontal: 10,
+    marginVertical: 5,
+  },
+  text: {
+    fontSize: 20,
+    paddingHorizontal: 30,
+  },
+  totalSpent: {
+    marginTop: 20,
+    fontSize: 20,
+    paddingHorizontal: 30,
+  },
+  money: {
+    fontWeight: 600,
   },
 });
